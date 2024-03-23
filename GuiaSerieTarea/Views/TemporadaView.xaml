@@ -1,0 +1,17 @@
+﻿<UserControl x:Class="GuiaSerieTarea.Views.TemporadaView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GuiaSerieTarea.Views" xmlns:viewsmodels="clr-namespace:GuiaSerieTarea.ViewsModels" d:DataContext="{d:DesignInstance Type=viewsmodels:GuiaEpisodiosViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <Grid Width="200" Height="120" Margin="15"  >
+        <Image Stretch="UniformToFill" Source="{Binding Imagen}"></Image>
+        <StackPanel  Background="#BF0E2424" Height="30" VerticalAlignment="Bottom" Orientation="Horizontal" HorizontalAlignment="Center" Width="200">
+
+            <TextBlock  Margin="10,0,0,0" Foreground="White" FontSize="10" FontWeight="Bold" FontFamily="Verdana">TEMPORADA <Run Text="{Binding NumeroTemporada}"></Run></TextBlock>
+        </StackPanel>
+    </Grid>
+</UserControl>

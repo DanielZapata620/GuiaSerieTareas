@@ -1,0 +1,118 @@
+﻿<UserControl x:Class="GuiaSerieTarea.Views.AgregarEpisodio"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:GuiaSerieTarea.Views" xmlns:viewsmodels="clr-namespace:GuiaSerieTarea.ViewsModels" d:DataContext="{d:DesignInstance Type=viewsmodels:GuiaEpisodiosViewModel}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <DockPanel Background="#1E1E1E">
+        <DockPanel.Resources>
+            <Style TargetType="TextBox">
+                <Setter Property="Background" Value="#BF0E2424"></Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
+                <Setter Property="Margin" Value="10,5,10,0"></Setter>
+                <Setter Property="FontSize" Value="16"></Setter>
+                <Setter Property="BorderBrush" Value="LightBlue"></Setter>
+                <Setter Property="BorderThickness" Value="2"></Setter>
+                <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+                <Setter Property="TextWrapping" Value="Wrap"></Setter>
+               
+            </Style>
+
+            <Style TargetType="Label">
+                <Setter Property="Width" Value="200"></Setter>
+                <Setter Property="Height" Value="40"></Setter>
+                <Setter Property="Foreground" Value="White"></Setter>
+                <Setter Property="Margin" Value="10,5,0,5"></Setter>
+                <Setter Property="FontSize" Value="16"></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+            </Style>
+            <Style TargetType="DatePicker">
+               
+                <Setter Property="Foreground" Value="White"></Setter>
+                <Setter Property="Margin" Value="10,5,10,5"></Setter>
+                <Setter Property="FontSize" Value="16"></Setter>
+                
+            </Style>
+            <Style TargetType="DatePickerTextBox">
+                <Setter Property="Background" Value="#1E1E1E"></Setter>
+                <Setter Property="FontFamily" Value="Segoe UI"></Setter>
+            </Style>
+            <Style TargetType="Button">
+                <Setter Property="Foreground" Value="White"></Setter>
+                <Setter Property="Background" Value="#2C2727"></Setter>
+                <Setter Property="Width" Value="100"></Setter>
+                <Setter Property="Height" Value="30" ></Setter>
+                <Setter Property="FontWeight" Value="Bold"></Setter>
+                <Setter Property="Margin" Value="10"></Setter>
+
+            </Style>
+        </DockPanel.Resources>
+        <StackPanel  DockPanel.Dock="Top">
+        
+
+        <TextBlock Foreground="LightBlue" FontSize="50" Margin="20" FontWeight="DemiBold">
+            <Run>
+                <Run.Style>
+                    <Style TargetType="Run">
+                        <Setter Property="Text" Value="AGREGAR"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Ventana}" Value="{x:Static viewsmodels:Ventanas.EditarEpisodio}">
+                                <Setter Property="Text" Value="EDITAR"></Setter>
+                            </DataTrigger>
+                                         
+                        </Style.Triggers>
+                    </Style>
+                </Run.Style>
+            </Run> <Run>EPISODIO</Run></TextBlock>
+            <DockPanel>
+                <Label Content="Nombre"></Label>
+                <TextBox Text="{Binding Episodio.Nombre}"></TextBox>
+            </DockPanel>
+            
+            <DockPanel>
+                <Label Content="Duracion en minutos"></Label>
+                <TextBox Text="{Binding Episodio.DuracionMinutos}"></TextBox>
+            </DockPanel>
+            <DockPanel>
+                <Label>Fecha de Lanzamiento</Label>
+            <DatePicker SelectedDate="{Binding Episodio.FechaLanzamientoEpisodio}"></DatePicker>
+            </DockPanel>
+                <DockPanel>
+                    <Label>Imagen</Label>
+                    <TextBox Text="{Binding Episodio.ImagenEpisodioo}"></TextBox>
+                </DockPanel>
+        
+        </StackPanel>
+    
+        <WrapPanel HorizontalAlignment="Right" DockPanel.Dock="Bottom">
+            
+            <ContentControl>
+                <ContentControl.Resources>
+                    <Button x:Key="btnAgregar" Content="Agregar" Command="{Binding AgregarEpidosioCommand}"></Button>
+                    <Button x:Key="btnGuardar" Content="Guardar" Command="{Binding EditarEpisodioCommand}"></Button>
+                </ContentControl.Resources>
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="Content" Value="{StaticResource btnAgregar}"></Setter>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding Ventana}" Value="{x:Static viewsmodels:Ventanas.EditarEpisodio}">
+                                <Setter Property="Content" Value="{StaticResource btnGuardar}"></Setter>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+            
+            <Button Command="{Binding CambiarVistaCommand}" CommandParameter="{Binding Tag,RelativeSource={RelativeSource Self}}" Tag="RegresarEpisodios">Cancelar</Button>
+        </WrapPanel>
+    <TextBlock Foreground="Red" DockPanel.Dock="Bottom" TextAlignment="Center" Margin="20,10,20,0" TextWrapping="Wrap" FontSize="14" Text="{Binding Error}"></TextBlock>
+        <DockPanel DockPanel.Dock="Bottom">
+            <Label VerticalAlignment="Top">Descripción</Label>
+            <TextBox Text="{Binding Episodio.DescripcionEpisodio}"></TextBox>
+        </DockPanel>
+    </DockPanel>
+</UserControl>
